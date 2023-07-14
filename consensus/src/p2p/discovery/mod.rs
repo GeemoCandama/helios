@@ -120,7 +120,7 @@ impl Discovery {
         })
     }
 
-    fn find_peers(&mut self) {
+    pub fn find_peers(&mut self) {
         let fork_digest = self.local_enr.fork_id().unwrap().fork_digest;
 
         let predicate: Box<dyn Fn(&Enr) -> bool + Send> = Box::new(move |enr: &Enr| {
@@ -129,10 +129,10 @@ impl Discovery {
 
         let target = NodeId::random();
 
-        let peers_enr = self.discv5.find_node_predicate(target, predicate, 16);
+        let query_future = self.discv5.find_node_predicate(target, predicate, 16);
 
         // TODO: Consider changing error handling to not use unwrap
-        self.active_queries.lock().unwrap().push(Box::pin(peers_enr));
+        self.active_queries.lock().unwrap().push(Box::pin(query_future));
     }
 
     fn get_peers(&mut self, cx: &mut Context) -> Option<DiscoveredPeers> {

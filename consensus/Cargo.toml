@@ -21,7 +21,7 @@ thiserror = "1.0.37"
 reqwest = { version = "0.11.13", features = ["json"] }
 discv5 = { version = "0.1.0", optional = true }
 # TODO: only import the necessary features
-libp2p = { version = "0.50.0", features = ["full"], optional = true }
+libp2p = { version = "0.50.0", features = ["full"]}
 tree_hash = { version = "0.4.0", optional = true }
 tree_hash_derive = { version = "0.4.0", optional = true }
 ssz-rs-derive = { git = "https://github.com/ralexstokes/ssz-rs", rev = "d09f55b4f8554491e3431e01af1c32347a8781cd", optional = true }
@@ -39,7 +39,6 @@ wasm-timer = "0.2.5"
 [features]
 p2p = [
     "dep:discv5", 
-    "dep:libp2p",
     "dep:tree_hash",
     "dep:tree_hash_derive",
     "dep:ssz-rs-derive",
